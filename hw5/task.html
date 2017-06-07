@@ -1,0 +1,159 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <script>
+
+        function Complete() {
+            var Elem = "Фамилия: " + document.Sel1.Family.value +
+                    "\nИмя: " + document.Sel1.Name.value +
+                    "\nОтчество: " + document.Sel1.middleName.value +
+                    "\nПол: " + document.Sel1.Sex.value +
+                    "\nУниверситет: " + document.Sel1.Univer.value +
+                    "\nКурс: " + document.Sel1.Course.value +
+                    "\nФорма обучения: " + showFormat(this.mas) +
+                    "\nО себе: " + document.Sel1.Message.value;
+            alert(Elem);
+        }
+        function showFormat() {
+            var inp = document.getElementsByName('Format');
+            var length = inp.length;
+            var mas = [];
+
+            for (var i = 0; i < length; i++) {
+                if (inp[i].checked) {
+                    mas.push(inp[i].nextSibling.nodeValue);
+                }
+            }
+            return mas.join(' ');
+        }
+
+        function CheckCourse(course) {
+            if (course < 1 || course > 4 || isNaN(course))
+                return '1';
+            else
+                return course;
+        }
+
+    </script>
+    <style>
+        .modalDialog {
+            position: fixed;
+            font-family: Arial, Helvetica, sans-serif;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            background: rgb(0, 0, 0);
+            z-index: 99999;
+            -webkit-transition: opacity 400ms ease-in;
+            -moz-transition: opacity 400ms ease-in;
+            transition: opacity 400ms ease-in;
+            display: none;
+            pointer-events: none;
+        }
+
+        .modalDialog:target {
+            display: block;
+            pointer-events: auto;
+        }
+
+        .modalDialog > div {
+            width: 400px;
+            position: relative;
+            margin: 10% auto;
+            padding: 5px 20px 13px 20px;
+            border-radius: 10px;
+            background: #fff;
+            background: -moz-linear-gradient(#fff, #999);
+            background: -webkit-linear-gradient(#fff, #999);
+            background: -o-linear-gradient(#fff, #999);
+        }
+
+        .close {
+            background: #606061;
+            color: #FFFFFF;
+            line-height: 25px;
+            position: absolute;
+            right: -12px;
+            text-align: center;
+            top: -10px;
+            width: 24px;
+            text-decoration: none;
+            font-weight: bold;
+            -webkit-border-radius: 12px;
+            -moz-border-radius: 12px;
+            border-radius: 12px;
+            -moz-box-shadow: 1px 1px 3px #000;
+            -webkit-box-shadow: 1px 1px 3px #000;
+            box-shadow: 1px 1px 3px #000;
+        }
+
+        .close:hover {
+            background: #00d9ff;
+        }
+    </style>
+
+</head>
+<body>
+<button onClick="getElementById('openModal').removeAttribute('style');" type="button">Модальное окно</button>
+<a href="#openModal">Сгенерировать форму</a>
+
+<div id="openModal" class="modalDialog">
+    <div>
+        <a href="#close" title="Закрыть" class="close">X</a>
+
+        <H1>Заполните анкету</H1>
+
+        <FORM NAME="Sel1">
+            <TABLE>
+                <TR>
+                    <TD><B>Фамилия:</B></TD>
+                    <TD><INPUT NAME="Family" SIZE=20</TD>
+                </TR>
+                <TR>
+                    <TD><B>Имя:</B></TD>
+                    <TD><label><INPUT NAME="Name" SIZE=20>ASfasf</label></TD>
+                </TR>
+                <TR>
+                    <TD><B>Отчество:</B></TD>
+                    <TD><INPUT NAME="middleName" SIZE=20</TD>
+                </TR>
+                <TR>
+                    <TD><B>Пол:</B></TD>
+                    <TD><INPUT TYPE="RADIO" NAME="Sex" VALUE="Мужской" CHECKED>Мужской
+                        <INPUT TYPE="RADIO" NAME="Sex" VALUE="Женский">Женский
+                </TR>
+                <TR>
+                    <TD><B>Университет</B></TD>
+                    <TD>
+                        <select name="Univer">
+                            <option></option>
+                            <option value="BSUIR">БГУИР</option>
+                            <option value="BSU">БГУ</option>
+                            <option value="BNTU">БНТУ</option>
+                        </select>
+                    </TD>
+                </TR>
+                <TR>
+                    <TD><B>Курс:</B></TD>
+                    <TD><INPUT NAME="Course" SIZE=1 VALUE="1"
+                               onBlur="this.value = CheckCourse(this.value)"></TD>
+                </TR>
+                <TR>
+                    <TD><B>Форма обучения:</B></TD>
+                    <TD><INPUT TYPE="checkbox" NAME="Format" VALUE="Очная" CHECKED>Очное
+                        <INPUT TYPE="checkbox" NAME="Format" VALUE="Заочная">Заочное<br>
+                        <INPUT TYPE="checkbox" NAME="Format" VALUE="Платное" CHECKED>Платное
+                        <INPUT TYPE="checkbox" NAME="Format" VALUE="Бюджетное">Бюджетное
+                </TR>
+            </TABLE>
+            <B>О себе:</B>
+                <LABEL>
+                    <textarea name="Message" style="display:block;width:400px;height:80px"></textarea>
+                </LABEL>
+                <INPUT TYPE="button" VALUE="Отправить" onClick="Complete();">
+        </FORM>
+    </div>
+</div>
+</body>
+</html>
